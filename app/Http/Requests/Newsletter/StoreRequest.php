@@ -27,8 +27,6 @@ class StoreRequest extends FormRequest
 
                 'name' =>'required|unique:newsletters,name',
                 'description'=>'required',
-                'active'=>'required|numeric||min:0|max:1',
-
         ];
     }
 }

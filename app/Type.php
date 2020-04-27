@@ -13,4 +13,12 @@ class Type extends Model
         return route('types.show' , ['type'=>$this->id]);
     }
 
+    
+    public function components()
+    {
+
+        return $this->hasMany(Component::class);       
+    }
+
+
 }

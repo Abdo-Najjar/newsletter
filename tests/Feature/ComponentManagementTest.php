@@ -34,8 +34,11 @@ class ComponentManagementTest extends TestCase
 
         ]);
 
+
+        $componentId = 1;
+
         //assert redirect to the component page
-        $response->assertRedirect();
+        $response->assertRedirect(route('components.show' , ['component'=>$componentId]));
 
         $this->assertCount(1, Component::all());
     }
@@ -62,10 +65,12 @@ class ComponentManagementTest extends TestCase
 
             'content' => " best friends!",
         ]);
-
         $this->assertEquals('best friends!', $component->fresh()->content);
 
-        $response->assertRedirect();
+
+        //assert redirect to the component page
+        $response->assertRedirect(route('components.show' , ['component'=>$component->id]));
+
     }
 
 
@@ -87,7 +92,7 @@ class ComponentManagementTest extends TestCase
         $response = $user->delete(route('components.destroy', ['component' => $component->id]));
 
         //check after the request send it would be redirect to the index page of the component
-        $response->assertRedirect();
+        $response->assertRedirect(route('components.index'));
 
         //check if the request delete the facker component from database
         $this->assertCount(0, Component::all());
@@ -109,7 +114,7 @@ class ComponentManagementTest extends TestCase
 
             'content' => "",
         ]);
-        $response->assertRedirect();
+
 
         $response->assertSessionHasErrors(['type_id', 'content']);
     }

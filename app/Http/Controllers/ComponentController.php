@@ -72,6 +72,7 @@ class ComponentController extends Controller
      */
     public function update(UpdateRequest $request, Component $component)
     {
+
         $component->update($request->all());
 
         return redirect($component->path());

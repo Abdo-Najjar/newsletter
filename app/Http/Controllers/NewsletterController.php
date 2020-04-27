@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\NewsletterDataTable;
 use App\Newsletter;
 use App\Http\Requests\Newsletter\UpdateRequest;
 use App\Http\Requests\Newsletter\StoreRequest;
@@ -12,9 +13,13 @@ class NewsletterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(NewsletterDataTable $datatable)
     {
-        //
+        
+        $title = "Liste des newsletters";
+
+       return  $datatable->render('dashboard.cruds.newsletter.index' ,compact('title') );
+
     }
 
     /**
@@ -24,7 +29,10 @@ class NewsletterController extends Controller
      */
     public function create()
     {
-        //
+        
+        $title = "";
+        
+        return view('dashboard.cruds.newsletter.create' , compact('title'));
     }
 
     /**
@@ -62,7 +70,10 @@ class NewsletterController extends Controller
      */
     public function edit(Newsletter $newsletter)
     {
-        //
+
+        $title = "";
+        
+        return view('dashboard.cruds.newsletter.edit' , compact('newsletter' , 'title'));
     }
 
     /**

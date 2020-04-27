@@ -10,6 +10,13 @@ class Component extends Model
 
     public function path()
     {
-        return route('components.show' , ['component'=>$this->id]);
+        return route('components.show', ['component' => $this->id]);
+    }
+
+    
+    public function type()
+    {
+
+        return $this->belongsTo(Type::class);
     }
 }

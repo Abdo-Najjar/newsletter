@@ -16,4 +16,16 @@ class Newsletter extends Model
     {
         return route('newsletters.show', ['newsletter' => $this->id]);
     }
+
+
+    public function getActiveAttribute($attribute)
+    {
+
+        return [
+            '0'=>"Inactive",
+            '1'=>"Active"
+        ][$attribute];
+
+    }
+
 }

@@ -22,7 +22,6 @@ class NewsletterManagementTest extends TestCase
         $response = $user->post('newsletters', [
             'name' => "News",
             'description' => "adsadsadsadadsdas",
-            "active" => '1'
         ]);
 
         $response->assertRedirect();
