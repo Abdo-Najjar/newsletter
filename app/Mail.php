@@ -12,4 +12,10 @@ class Mail extends Model
     {
         return route('mails.show' , ['mail'=>$this->id]);
     }
+
+    public function newsletter()
+    {
+
+        return $this->belongsTo(Newsletter::class);
+    }
 }

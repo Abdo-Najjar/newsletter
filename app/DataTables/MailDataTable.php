@@ -32,7 +32,7 @@ class MailDataTable extends DataTable
      */
     public function query(Mail $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('newsletter');
     }
 
     /**
@@ -60,21 +60,17 @@ class MailDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('created_at'),
             Column::make('title'),   
             Column::make('content')->addClass('text-center'),
-            // Column::make('Newsletter'),
+            Column::make('newsletter.name' ,'newsletter.name' )->title('Newsletter'),
+            Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            // ->width(60)
+            ->width(60)
             ->addClass('text-center')
         ];
-
-        // newsletter_id
-        
-
     }
 
     /**
