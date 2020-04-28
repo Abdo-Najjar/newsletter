@@ -21,7 +21,12 @@ class NewsletterDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'dashboard.cruds.newsletter.action');
+            ->addColumn('action', 'dashboard.cruds.newsletter.action')
+            ->addColumn('NumberOfMails' , function($newsletter){
+
+                return $newsletter->mails()->count();
+           
+            });
     }
 
     /**
@@ -61,8 +66,9 @@ class NewsletterDataTable extends DataTable
             
             Column::make('id')->title('ID'),
             Column::make('name')->title('Nom'),
-            Column::make('description'),
+            // Column::make('description'),
             Column::make('active'),
+            Column::make('NumberOfMails')->title("Number Of Mails"),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

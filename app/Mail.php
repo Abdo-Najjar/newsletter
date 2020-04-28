@@ -15,7 +15,7 @@ class Mail extends Model
 
     public function newsletter()
     {
-
         return $this->belongsTo(Newsletter::class);
     }
+
 }
