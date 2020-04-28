@@ -38,8 +38,6 @@ class ComponentController extends Controller
     {
         $component =  Component::create($request->all());
 
-        $this->flashCreatedSuccessfully();
-
         return redirect($component->path());
     }
 
@@ -77,8 +75,6 @@ class ComponentController extends Controller
 
         $component->update($request->all());
 
-        $this->flashUpdatedSuccessfully();
-
         return redirect($component->path());
     }
 
@@ -92,8 +88,6 @@ class ComponentController extends Controller
     {
 
         $component->delete();
-
-        $this->flashDeletedSuccessfully();
 
         return redirect()->route('components.index');
     }
