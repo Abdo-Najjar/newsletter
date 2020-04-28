@@ -1,11 +1,11 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
 
 use App\Mail;
 use App\Http\Requests\Mail\StoreRequest;
 use App\Http\Requests\Mail\UpdateRequest;
-
+use App\Http\Controllers\Controller;
 class MailController extends Controller
 {
     /**
@@ -38,6 +38,8 @@ class MailController extends Controller
     {
         $mail = Mail::create($request->all());
 
+        $this->flashCreatedSuccessfully();
+
         return redirect($mail->path());
     }
 
@@ -49,7 +51,7 @@ class MailController extends Controller
      */
     public function show(Mail $mail)
     {
-        //
+        return view('dashboard.cruds.mail.show' , compact('mail'));
     }
 
     /**
@@ -74,6 +76,8 @@ class MailController extends Controller
     {
         $mail->update($request->all());
 
+        $this->flashUpdatedSuccessfully();
+
         return redirect($mail->path());
     }
 
@@ -86,6 +90,8 @@ class MailController extends Controller
     public function destroy(Mail $mail)
     {
         $mail->delete();
+
+        $this->flashDeletedSuccessfully();
 
         return redirect('mails');
     }

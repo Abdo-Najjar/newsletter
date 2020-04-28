@@ -47,14 +47,7 @@ class NewsletterDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('lBfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                    ->orderBy(1);
     }
 
     /**
@@ -75,7 +68,6 @@ class NewsletterDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            // ->width(60)
             ->addClass('text-center')
 
         ];

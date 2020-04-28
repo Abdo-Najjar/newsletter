@@ -1,14 +1,14 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
 
-use App\Type;
-use Illuminate\Http\Request;
-use App\Http\Requests\Type\StoreRequest;
-use App\Http\Requests\Type\UpdateRequest;
-class TypeController extends Controller
+use App\Component;
+use App\Http\Requests\Component\StoreRequest;
+use App\Http\Requests\Component\UpdateRequest;
+use App\Http\Controllers\Controller;
+class ComponentController extends Controller
 {
- /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,30 +36,31 @@ class TypeController extends Controller
      */
     public function store(StoreRequest $request)
     {
-      
-        $type= Type::create($request->all());
+        $component =  Component::create($request->all());
 
-        return redirect($type->path());
+        $this->flashCreatedSuccessfully();
+
+        return redirect($component->path());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Type  $type
+     * @param  \App\Component  $component
      * @return \Illuminate\Http\Response
      */
-    public function show(Type $type)
+    public function show(Component $component)
     {
-        //
+        return view('dashboard.cruds.component.show' , compact('component'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Type  $type
+     * @param  \App\Component  $component
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit(Component $component)
     {
         //
     }
@@ -68,26 +69,32 @@ class TypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Type  $type
+     * @param  \App\Component  $component
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Type $type)
+    public function update(UpdateRequest $request, Component $component)
     {
-        $type->update($request->all());
 
-        return redirect($type->path());
+        $component->update($request->all());
+
+        $this->flashUpdatedSuccessfully();
+
+        return redirect($component->path());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Type  $type
+     * @param  \App\Component  $component
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy(Component $component)
     {
-     $type->delete();
 
-        return redirect('types');
+        $component->delete();
+
+        $this->flashDeletedSuccessfully();
+
+        return redirect()->route('components.index');
     }
 }

@@ -1,14 +1,14 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
 
-use App\Component;
-use App\Http\Requests\Component\StoreRequest;
-use App\Http\Requests\Component\UpdateRequest;
-
-class ComponentController extends Controller
+use App\Type;
+use App\Http\Requests\Type\StoreRequest;
+use App\Http\Requests\Type\UpdateRequest;
+use App\Http\Controllers\Controller;
+class TypeController extends Controller
 {
-   /**
+ /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,18 +36,19 @@ class ComponentController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $component =  Component::create($request->all());
+      
+        $type= Type::create($request->all());
 
-        return redirect($component->path());
+        return redirect($type->path());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Component  $component
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function show(Component $component)
+    public function show(Type $type)
     {
         //
     }
@@ -55,10 +56,10 @@ class ComponentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Component  $component
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Component $component)
+    public function edit(Type $type)
     {
         //
     }
@@ -67,28 +68,26 @@ class ComponentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Component  $component
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Component $component)
+    public function update(UpdateRequest $request, Type $type)
     {
+        $type->update($request->all());
 
-        $component->update($request->all());
-
-        return redirect($component->path());
+        return redirect($type->path());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Component  $component
+     * @param  \App\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Component $component)
+    public function destroy(Type $type)
     {
+     $type->delete();
 
-        $component->delete();
-
-        return redirect()->route('components.index');
+        return redirect('types');
     }
 }
