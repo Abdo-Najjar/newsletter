@@ -31,7 +31,6 @@ class Newsletter extends Model
 
     public function mails()
     {
-
         return $this->hasMany(Mail::class);
     }
 }

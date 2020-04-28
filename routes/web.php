@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail;
+use App\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -18,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->namespace('Admin')-> group(function () {
+Route::middleware('auth')->namespace('Admin')->group(function () {
 
     Route::resource('types', 'TypeController');
 
@@ -26,7 +28,7 @@ Route::middleware('auth')->namespace('Admin')-> group(function () {
 
     Route::resource('mails', 'MailController');
 
-    Route::resource('components' , 'ComponentController');
+    Route::resource('components', 'ComponentController');
 });
 
 

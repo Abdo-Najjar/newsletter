@@ -22,6 +22,7 @@ class MailDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', 'mail.action');
+            
     }
 
     /**
@@ -59,10 +60,9 @@ class MailDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->title('ID'),
             Column::make('title'),   
-            Column::make('content')->addClass('text-center'),
-            Column::make('newsletter.name' ,'newsletter.name' )->title('Newsletter'),
+            Column::make('newsletter.name')->title('Newsletter'),   
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
