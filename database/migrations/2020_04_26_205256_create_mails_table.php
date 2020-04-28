@@ -17,7 +17,7 @@ class CreateMailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('newsletter_id');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->foreign('newsletter_id')->references('id')->on('newsletters');
             $table->timestamps();
         });

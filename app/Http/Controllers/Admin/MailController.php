@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-
+use App\DataTables\MailDataTable;
 use App\Mail;
 use App\Http\Requests\Mail\StoreRequest;
 use App\Http\Requests\Mail\UpdateRequest;
@@ -13,9 +13,12 @@ class MailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(MailDataTable $mailDataTable)
     {
-        //
+
+        $title = "";
+
+        return $mailDataTable->render('dashboard.cruds.index' ,compact('title') );
     }
 
     /**

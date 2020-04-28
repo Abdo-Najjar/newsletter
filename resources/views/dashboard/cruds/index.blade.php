@@ -4,13 +4,11 @@
 @push('css')
     
 <style>
-#newsletter-table_length{
+    #newsletter-table_length , #mail-table_length{
 
-margin-right: 3rem;
+    margin-right: 3rem;
 
-}
-
-
+    }
 </style>
 @endpush
 
