@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-inline-flex">
 
 <a class="btn btn-primary m-2" href="{{route('newsletters.show' , ['newsletter'=>$id])}}">Show</a>
 

@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Newsletter;
+use App\Mail;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class NewsletterDataTable extends DataTable
+class MailDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class NewsletterDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'dashboard.cruds.newsletter.action');
+            ->addColumn('action', 'mail.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Newsletter $model
+     * @param \App\Mail $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Newsletter $model)
+    public function query(Mail $model)
     {
         return $model->newQuery();
     }
@@ -43,11 +43,12 @@ class NewsletterDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('newsletter-table')
+                    ->setTableId('mail-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('lBfrtip')
                     ->orderBy(1);
+                    
     }
 
     /**
@@ -58,19 +59,22 @@ class NewsletterDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
-            Column::make('id')->title('ID'),
-            Column::make('name')->title('Nom'),
-            Column::make('description'),
-            Column::make('active'),
+            Column::make('id'),
             Column::make('created_at'),
+            Column::make('title'),   
+            Column::make('content')->addClass('text-center'),
+            // Column::make('Newsletter'),
             Column::make('updated_at'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
+            // ->width(60)
             ->addClass('text-center')
-
         ];
+
+        // newsletter_id
+        
+
     }
 
     /**
@@ -80,6 +84,6 @@ class NewsletterDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Newsletter_' . date('YmdHis');
+        return 'Mail_' . date('YmdHis');
     }
 }

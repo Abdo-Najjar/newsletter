@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->namespace('Admin')-> group(function () {
 
     Route::resource('types', 'TypeController');
 

@@ -32,7 +32,7 @@ class NewsletterManagementTest extends TestCase
 
         $this->assertEquals('adsadsadsadadsdas', NewsLetter::first()->description);
 
-        $this->assertEquals('1', NewsLetter::first()->active);
+        $this->assertEquals('Active', NewsLetter::first()->active);
     }
 
     /**
@@ -49,10 +49,9 @@ class NewsletterManagementTest extends TestCase
         $response = $user->post('newsletters', [
             'name' => "",
             'description' => "",
-            "active" => ''
         ]);
 
-        $response->assertSessionHasErrors(['name', 'description', 'active']);
+        $response->assertSessionHasErrors(['name', 'description']);
 
 
         //successfully created
@@ -64,11 +63,10 @@ class NewsletterManagementTest extends TestCase
         $response = $user->post('newsletters', [
             'name' => "News",
             'description' => "adsadsadsadadsdas",
-            "active" => '9'
         ]);
 
 
-        $response->assertSessionHasErrors(['name', 'active']);
+        $response->assertSessionHasErrors(['name']);
 
 
 
@@ -125,7 +123,7 @@ class NewsletterManagementTest extends TestCase
 
         $this->assertEquals('osamaosamaosamaosama' , $newsletter->fresh()->description);
 
-        $this->assertEquals('1' , $newsletter->fresh()->active);
+        $this->assertEquals('Active' , $newsletter->fresh()->active);
 
         $response->assertRedirect();
 

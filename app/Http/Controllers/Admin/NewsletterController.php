@@ -1,11 +1,12 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
 
 use App\DataTables\NewsletterDataTable;
 use App\Newsletter;
 use App\Http\Requests\Newsletter\UpdateRequest;
 use App\Http\Requests\Newsletter\StoreRequest;
+use App\Http\Controllers\Controller;
 class NewsletterController extends Controller
 {
    /**
@@ -18,7 +19,7 @@ class NewsletterController extends Controller
         
         $title = "Liste des newsletters";
 
-       return  $datatable->render('dashboard.cruds.newsletter.index' ,compact('title') );
+       return  $datatable->render('dashboard.cruds.index' ,compact('title') );
 
     }
 
@@ -43,9 +44,9 @@ class NewsletterController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
-
         $newsletter =  Newsletter::create($request->all());
+
+        $this->flashCreatedSuccessfully();
 
         return redirect($newsletter->path());
     }
@@ -59,7 +60,7 @@ class NewsletterController extends Controller
 
     public function show(Newsletter $newsletter)
     {
-        //
+        return view('dashboard.cruds.newsletter.show' , compact('newsletter'));
     }
 
     /**
@@ -89,6 +90,7 @@ class NewsletterController extends Controller
 
         $newsletter->update($request->all());
 
+        $this->flashUpdatedSuccessfully();
 
         return redirect($newsletter->path());
 
