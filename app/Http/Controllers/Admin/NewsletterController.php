@@ -16,7 +16,7 @@ class NewsletterController extends Controller
      */
     public function index(NewsletterDataTable $datatable)
     {
-        
+
         $title = "Liste des newsletters";
 
        return  $datatable->render('dashboard.cruds.index' ,compact('title') );
@@ -30,9 +30,9 @@ class NewsletterController extends Controller
      */
     public function create()
     {
-        
-        $title = "";
-        
+
+        $title = "Ajouter une newsletter";
+
         return view('dashboard.cruds.newsletter.create' , compact('title'));
     }
 
@@ -59,7 +59,9 @@ class NewsletterController extends Controller
      */
 
     public function show(Newsletter $newsletter)
+
     {
+
         return view('dashboard.cruds.newsletter.show' , compact('newsletter'));
     }
 
@@ -72,8 +74,8 @@ class NewsletterController extends Controller
     public function edit(Newsletter $newsletter)
     {
 
-        $title = "";
-        
+        $title = "Modifier une newsletter";
+
         return view('dashboard.cruds.newsletter.edit' , compact('newsletter' , 'title'));
     }
 

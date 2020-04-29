@@ -3,9 +3,12 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Component;
+use App\DataTables\ComponentDataTable;
 use App\Http\Requests\Component\StoreRequest;
 use App\Http\Requests\Component\UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Type;
+
 class ComponentController extends Controller
 {
    /**
@@ -13,9 +16,12 @@ class ComponentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ComponentDataTable $componentDataTable)
     {
-        //
+        $title = "Liste des Components";
+        return $componentDataTable->render('dashboard.cruds.index',compact('title'));
+
+
     }
 
     /**
@@ -25,7 +31,11 @@ class ComponentController extends Controller
      */
     public function create()
     {
-        //
+        $title = "créer un composant";
+        $types=Type::all();
+
+
+        return view('dashboard.cruds.component.create' , compact('title','types'));
     }
 
     /**
@@ -37,6 +47,7 @@ class ComponentController extends Controller
     public function store(StoreRequest $request)
     {
         $component =  Component::create($request->all());
+        $this->flashCreatedSuccessfully();
 
         return redirect($component->path());
     }
@@ -60,7 +71,10 @@ class ComponentController extends Controller
      */
     public function edit(Component $component)
     {
-        //
+        $title = "Modifier le component";
+        $types=Type::all();
+
+        return view('dashboard.cruds.component.edit' , compact('component' , 'title','types'));
     }
 
     /**
@@ -74,6 +88,7 @@ class ComponentController extends Controller
     {
 
         $component->update($request->all());
+        $this->flashUpdatedSuccessfully();
 
         return redirect($component->path());
     }
@@ -88,6 +103,8 @@ class ComponentController extends Controller
     {
 
         $component->delete();
+
+        $this->flashDeletedSuccessfully();
 
         return redirect()->route('components.index');
     }

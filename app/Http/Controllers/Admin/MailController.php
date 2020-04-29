@@ -6,6 +6,8 @@ use App\Mail;
 use App\Http\Requests\Mail\StoreRequest;
 use App\Http\Requests\Mail\UpdateRequest;
 use App\Http\Controllers\Controller;
+use App\Newsletter;
+
 class MailController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class MailController extends Controller
     public function index(MailDataTable $mailDataTable)
     {
 
-        $title = "";
+        $title = "Liste des Mails";
 
         return $mailDataTable->render('dashboard.cruds.index' ,compact('title') );
     }
@@ -28,7 +30,10 @@ class MailController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Construire un mail";
+        $newsletters=Newsletter::all();
+
+        return view('dashboard.cruds.mail.create' , compact('title','newsletters'));
     }
 
     /**
@@ -65,7 +70,10 @@ class MailController extends Controller
      */
     public function edit(Mail $mail)
     {
-        //
+        $title = "Modifier un mail";
+        $newsletters=Newsletter::all();
+
+        return view('dashboard.cruds.mail.edit' , compact('mail' , 'title','newsletters'));
     }
 
     /**
@@ -96,6 +104,6 @@ class MailController extends Controller
 
         $this->flashDeletedSuccessfully();
 
-        return redirect('mails');
+        return redirect()->route('mails.index');
     }
 }

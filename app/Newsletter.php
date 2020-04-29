@@ -20,7 +20,6 @@ class Newsletter extends Model
 
     public function getActiveAttribute($attribute)
     {
-
         return [
             '0'=>"Inactive",
             '1'=>"Active"

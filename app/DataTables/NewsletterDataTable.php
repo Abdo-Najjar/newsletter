@@ -25,7 +25,7 @@ class NewsletterDataTable extends DataTable
             ->addColumn('NumberOfMails' , function($newsletter){
 
                 return $newsletter->mails()->count();
-           
+
             });
     }
 
@@ -63,7 +63,7 @@ class NewsletterDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+
             Column::make('id')->title('ID'),
             Column::make('name')->title('Nom'),
             // Column::make('description'),
