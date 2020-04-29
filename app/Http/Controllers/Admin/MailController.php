@@ -18,6 +18,7 @@ class MailController extends Controller
     public function index(MailDataTable $mailDataTable)
     {
 
+
         $title = "Liste des Mails";
 
         return $mailDataTable->render('dashboard.cruds.index' ,compact('title') );
@@ -31,6 +32,7 @@ class MailController extends Controller
     public function create()
     {
         $title = "Construire un mail";
+
         $newsletters=Newsletter::all();
 
         return view('dashboard.cruds.mail.create' , compact('title','newsletters'));
@@ -59,6 +61,11 @@ class MailController extends Controller
      */
     public function show(Mail $mail)
     {
+
+        //load the  newsletter relationship 
+        $mail->load('newsletter');
+
+        // dd($mail);
         return view('dashboard.cruds.mail.show' , compact('mail'));
     }
 
@@ -71,6 +78,7 @@ class MailController extends Controller
     public function edit(Mail $mail)
     {
         $title = "Modifier un mail";
+
         $newsletters=Newsletter::all();
 
         return view('dashboard.cruds.mail.edit' , compact('mail' , 'title','newsletters'));

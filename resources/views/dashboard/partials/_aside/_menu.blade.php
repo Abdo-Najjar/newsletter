@@ -25,7 +25,7 @@
 
 
 
-			<li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--open" aria-haspopup="true"
+					<li class="kt-menu__item  kt-menu__item--submenu {{openAsideMenuElement('newsletters')}}" aria-haspopup="true"
 				data-ktmenu-submenu-toggle="hover">
 				<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
 					<span class="kt-menu__link-icon">
@@ -71,7 +71,7 @@
 			</li>
 
 
-			<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+			<li class="kt-menu__item  kt-menu__item--submenu {{openAsideMenuElement('mails')}}" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
 				<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
 					<span class="kt-menu__link-icon">
 
@@ -113,7 +113,7 @@
 
 
 
-			<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+			<li class="kt-menu__item  kt-menu__item--submenu {{openAsideMenuElement('components')}} " aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
 				<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
 					<span class="kt-menu__link-icon">
 
@@ -128,7 +128,7 @@
 						</svg>
 
 					</span>
-					<span class="kt-menu__link-text">Components</span>
+					<span class="kt-menu__link-text ">Components</span>
 					<i class="kt-menu__ver-arrow la la-angle-right"></i>
 				</a>
 

@@ -90,9 +90,6 @@ class NewsletterManagementTest extends TestCase
         $response->assertSessionHasNoErrors();
     }
 
-
-
-
     /**
      * @test
      *
@@ -128,4 +125,124 @@ class NewsletterManagementTest extends TestCase
         $response->assertRedirect();
 
     }
+
+
+    /**
+     * @test
+     */
+    public function acive_and_inactive_newsletter()
+    {
+
+        $user = $this->actingAs(factory(User::class)->create());
+
+
+        $newsletter = factory(Newsletter::class)->create([
+
+            'active' =>'0'
+        ]);
+
+
+        //change the status of the newsletter to active
+        $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+            'active'=>'1'
+
+        ]);
+
+        $response->assertSessionDoesntHaveErrors();
+
+        $this->assertEquals('1' , $newsletter->fresh()->getOriginal('active'));
+
+
+        //change the status of the newsletter to inactive
+        $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]));
+        
+        $response->assertSessionDoesntHaveErrors();
+
+        $this->assertEquals('0' , $newsletter->fresh()->getOriginal('active'));
+    
+    }
+
+
+    // /**
+    //  *
+    //  * @test
+    //  */
+    // public function acive_and_inactive_newsletter_validation()
+    // {
+
+    //     $user = $this->actingAs(factory(User::class)->create());
+
+
+    //     $newsletter = factory(Newsletter::class)->create([
+
+    //         'active' =>'0'
+    //     ]);
+
+
+    //     //check if the validation pass in case the active is 1
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>'1'
+
+    //     ]);
+
+    //     $response->assertSessionDoesntHaveErrors();
+
+
+    //     //check if the validation pass in case the active is 0
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>'0'
+
+    //     ]);
+
+    //     $response->assertSessionDoesntHaveErrors();
+        
+
+    //     //check if the vaidation will falid in case the active is empty
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>''
+
+    //     ]);
+
+    //     $response->assertSessionHasErrors(['active']);
+
+
+
+    //     //check if the vaidation will falid in case the active is not numeric
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>'asdasdsad'
+
+    //     ]);
+
+    //     $response->assertSessionHasErrors(['active']);
+
+
+
+
+    //     //check if the vaidation will falid in case the active is larger that 1
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>'9'
+
+    //     ]);
+
+    //     $response->assertSessionHasErrors(['active']);
+
+
+
+
+    //     //check if the vaidation will falid in case the active is smaller that 0
+    //     $response =  $user->patch(route('newsletters.changeStatus',['newsletter'=>$newsletter->id]) , [
+
+    //         'active'=>'-1'
+
+    //     ]);
+
+    //     $response->assertSessionHasErrors(['active']);
+
+    // }
 }

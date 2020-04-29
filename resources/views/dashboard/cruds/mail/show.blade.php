@@ -23,9 +23,14 @@
 
         </div>
         <div class="kt-portlet__body">
-            <lu>
+            <ul>
                 <li>
                     Content : {{$mail->content}}
+                </li>
+
+
+                <li>
+                    Newsletter : {{$mail->newsletter->name}}
                 </li>
 
                 <li>
@@ -37,7 +42,7 @@
                 </li>
 
 
-            </lu>
+            </ul>
 
 
         </div>

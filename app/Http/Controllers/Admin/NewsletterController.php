@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 
@@ -7,9 +8,10 @@ use App\Newsletter;
 use App\Http\Requests\Newsletter\UpdateRequest;
 use App\Http\Requests\Newsletter\StoreRequest;
 use App\Http\Controllers\Controller;
+
 class NewsletterController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -19,8 +21,7 @@ class NewsletterController extends Controller
 
         $title = "Liste des newsletters";
 
-       return  $datatable->render('dashboard.cruds.index' ,compact('title') );
-
+        return  $datatable->render('dashboard.cruds.index', compact('title'));
     }
 
     /**
@@ -33,7 +34,7 @@ class NewsletterController extends Controller
 
         $title = "Ajouter une newsletter";
 
-        return view('dashboard.cruds.newsletter.create' , compact('title'));
+        return view('dashboard.cruds.newsletter.create', compact('title'));
     }
 
     /**
@@ -59,10 +60,11 @@ class NewsletterController extends Controller
      */
 
     public function show(Newsletter $newsletter)
-
     {
 
-        return view('dashboard.cruds.newsletter.show' , compact('newsletter'));
+        $title = "Show Newsletter";
+
+        return view('dashboard.cruds.newsletter.show', compact('newsletter', 'title'));
     }
 
     /**
@@ -76,7 +78,7 @@ class NewsletterController extends Controller
 
         $title = "Modifier une newsletter";
 
-        return view('dashboard.cruds.newsletter.edit' , compact('newsletter' , 'title'));
+        return view('dashboard.cruds.newsletter.edit', compact('newsletter', 'title'));
     }
 
     /**
@@ -87,7 +89,7 @@ class NewsletterController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(UpdateRequest $request , Newsletter $newsletter)
+    public function update(UpdateRequest $request, Newsletter $newsletter)
     {
 
         $newsletter->update($request->all());
@@ -95,7 +97,6 @@ class NewsletterController extends Controller
         $this->flashUpdatedSuccessfully();
 
         return redirect($newsletter->path());
-
     }
 
     /**
@@ -107,5 +108,29 @@ class NewsletterController extends Controller
     public function destroy(Newsletter $newsletter)
     {
         //
+    }
+
+
+    public function changeStatus(Newsletter $newsletter)
+    {
+
+
+        if (request()->has('active')) {
+
+            $newsletter->update([
+                'active' => "1"
+            ]);
+
+        } else {
+
+            $newsletter->update([
+                'active' => "0"
+            ]);
+
+        }
+
+        $this->flashUpdatedSuccessfully();
+
+        return redirect()->back();
     }
 }

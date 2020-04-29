@@ -51,4 +51,23 @@
 
 {!! $dataTable->scripts() !!}
 
+{{-- active-status --}}
+
+<script>
+
+    document.querySelector("#newsletter-table").addEventListener('click' , (e)=>{
+
+        
+        // if(e.target.className)
+
+        if(e.target.className == "active-newsletter"){
+
+            e.target.parentElement.parentElement.parentElement.submit();
+
+        }
+
+    });
+</script>
+
+
 @endpush

@@ -14,8 +14,6 @@
 
     @csrf
 
-
-
         <div class="form-group validated">
             <label class="form-control-label" for="inputSuccess1">Content</label>
             <input name="content" type="text" value="{{old('content')}}" class="form-control   @error('content') is-invalid @enderror " id="inputSuccess1">
@@ -26,7 +24,7 @@
             @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group validated">
             <label>Chose a type:</label>
             <div></div>
             <select class="custom-select form-control " name="type_id">
@@ -37,8 +35,7 @@
             </select>
         </div>
 
-    </div>
-    <div class="kt-portlet__foot">
+    <div class="form-group">
         <div class="kt-form__actions">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
