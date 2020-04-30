@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Mail::class, function (Faker $faker) {
 
     return [
-        'title' => $faker->title,
+        'title' => $faker->unique()->name,
         'content' => $faker->sentence(50),
         'newsletter_id' => factory(Newsletter::class),
     ];

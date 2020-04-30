@@ -16,7 +16,7 @@ class CreateMailsTable extends Migration
         Schema::create('mails', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('newsletter_id');
-            $table->string('title');
+            $table->string('title')->uniqid();
             $table->text('content');
             $table->foreign('newsletter_id')->references('id')->on('newsletters');
             $table->timestamps();

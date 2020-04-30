@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Newsletter::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->unique()->name,
 
         'description' => $faker->text(),
         

@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('last_name')->nullable();
-            $table->enum('role', [0, 1])->nullable();
+
+            //0 for client 1 for admin
+            $table->enum('role', [0, 1]);
             $table->string('picture_url')->nullable();
             $table->date('dob')->nullable();
             $table->string('email')->unique();
@@ -33,6 +35,7 @@ class CreateUsersTable extends Migration
             'name' => 'abdo',
             'email' => 'a@a.com',
             'password' => bcrypt('123456789'),
+            "role"=>"1"
         ]);
     }
 
