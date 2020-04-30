@@ -47,3 +47,7 @@ Route::middleware(['auth' , 'admin'])->namespace('Admin')->group(function () {
 Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
