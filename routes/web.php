@@ -2,6 +2,7 @@
 
 use App\Mail;
 use App\Newsletter;
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -20,7 +21,16 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->namespace('Admin')->group(function () {
+
+Route::get('/logout' , function(){
+      
+    auth()->logout(); 
+    
+    return back();
+});
+
+
+Route::middleware(['auth' , 'admin'])->namespace('Admin')->group(function () {
 
     Route::resource('newsletters', 'NewsletterController')->except('delete');
 
@@ -31,9 +41,9 @@ Route::middleware('auth')->namespace('Admin')->group(function () {
     Route::resource('components', 'ComponentController');
     
     Route::resource('types', 'TypeController');
+
 });
 
-
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
