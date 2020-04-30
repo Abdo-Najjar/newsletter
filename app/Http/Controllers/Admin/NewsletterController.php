@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\DataTables\NewsletterDataTable;
+use App\DataTables\NewsletterMailsDataTable;
 use App\Newsletter;
 use App\Http\Requests\Newsletter\UpdateRequest;
 use App\Http\Requests\Newsletter\StoreRequest;
@@ -64,7 +65,9 @@ class NewsletterController extends Controller
 
         $title = "Show Newsletter";
 
-        return view('dashboard.cruds.newsletter.show', compact('newsletter', 'title'));
+        $newsletterMailsDataTable = new  NewsletterMailsDataTable($newsletter->id);
+
+        return $newsletterMailsDataTable->render('dashboard.cruds.newsletter.show' ,compact('newsletter', 'title'));
     }
 
     /**
