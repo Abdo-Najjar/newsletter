@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected $attributes = [
+
+        //set default value for role as aclient
+        'role' => '0',
+    ];
+
 }
